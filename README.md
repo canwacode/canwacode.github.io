@@ -1,5 +1,5 @@
 # canwacode.github.io
 
-CANWA / huashanwawa 个人站点。期待游戏作品《围猎》。
+CANWA / huoshanwawa 个人站点。期待游戏作品《围猎》。
 
 站点：https://canwacode.github.io
