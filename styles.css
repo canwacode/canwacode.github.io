@@ -1,0 +1,217 @@
+:root {
+  --bg-0: #070708;
+  --bg-1: #0e1014;
+  --ink: #eceae4;
+  --muted: #8a8780;
+  --accent: #e8ff47;
+  --line: rgba(232, 255, 71, 0.18);
+  --font-display: "Syne", sans-serif;
+  --font-body: "IBM Plex Sans", sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--ink);
+  background:
+    radial-gradient(ellipse 90% 60% at 70% -10%, rgba(232, 255, 71, 0.08), transparent 55%),
+    radial-gradient(ellipse 70% 50% at 10% 110%, rgba(80, 110, 255, 0.07), transparent 50%),
+    linear-gradient(165deg, var(--bg-0) 0%, var(--bg-1) 55%, #0a0b0e 100%);
+  overflow-x: hidden;
+}
+
+.noise {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  opacity: 0.045;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px;
+}
+
+.grid {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 20%, transparent 75%);
+  opacity: 0.55;
+  animation: grid-drift 28s linear infinite;
+}
+
+@keyframes grid-drift {
+  from { background-position: 0 0, 0 0; }
+  to { background-position: 72px 72px, 72px 72px; }
+}
+
+.stage {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(2rem, 6vw, 5rem) clamp(1.5rem, 8vw, 7rem);
+  max-width: 1100px;
+  transform: translate3d(var(--mx, 0), var(--my, 0), 0);
+  transition: transform 0.35s ease-out;
+}
+
+.brand {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(3.2rem, 11vw, 7.5rem);
+  letter-spacing: -0.06em;
+  line-height: 0.9;
+  opacity: 0;
+  animation: rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.05s forwards;
+}
+
+.studio {
+  margin-top: 0.65rem;
+  font-size: 0.85rem;
+  font-weight: 400;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--muted);
+  opacity: 0;
+  animation: rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.18s forwards;
+}
+
+.title {
+  margin-top: clamp(2.5rem, 7vh, 4.5rem);
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.title .line {
+  font-size: clamp(1.15rem, 2.8vw, 1.65rem);
+  font-weight: 600;
+  color: var(--muted);
+  opacity: 0;
+  animation: rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+}
+
+.title .game {
+  font-size: clamp(2.6rem, 8vw, 5.2rem);
+  font-weight: 800;
+  line-height: 1;
+  color: var(--accent);
+  text-shadow: 0 0 40px rgba(232, 255, 71, 0.25);
+  opacity: 0;
+  animation: rise 0.95s cubic-bezier(0.16, 1, 0.3, 1) 0.42s forwards;
+}
+
+.lede {
+  margin-top: clamp(1.4rem, 3.5vh, 2.2rem);
+  max-width: 34rem;
+  font-size: clamp(0.95rem, 1.6vw, 1.1rem);
+  font-weight: 300;
+  line-height: 1.75;
+  color: #c4c1b8;
+  opacity: 0;
+  animation: rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.55s forwards;
+}
+
+.tag {
+  margin-top: clamp(1.8rem, 4vh, 2.8rem);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  opacity: 0;
+  animation: rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.68s forwards;
+}
+
+.foot {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0 clamp(1.5rem, 8vw, 7rem) 1.75rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  opacity: 0;
+  animation: rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.8s forwards;
+}
+
+.foot a {
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.foot a:hover {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+.dot {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--muted);
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .grid {
+    animation: none;
+  }
+
+  .brand,
+  .studio,
+  .title .line,
+  .title .game,
+  .lede,
+  .tag,
+  .foot {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+@media (max-width: 640px) {
+  .lede br {
+    display: none;
+  }
+
+  .lede {
+    line-height: 1.7;
+  }
+}
